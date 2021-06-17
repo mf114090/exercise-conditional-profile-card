@@ -1,3 +1,4 @@
+import "../style/index.scss";
 /*
 {
     includeCover: true, // if includeCover is true the algorithm should
@@ -23,13 +24,13 @@ function render(variables = {}) {
   // if includeCover==false then we reset the cover code without the <img> tag to make the cover transparent.
   let cover = `<div class="cover"><img src="${variables.background}" /></div>`;
   let githubLink = `${variables.github}`;
-  if (variablesz.includeCover == false) cover = "<div class='cover'></div>";
+  if (variables.includeCover == false) cover = "<div class='cover'></div>";
 
   // reset the website body with the new html output
   document.querySelector("#widget_content").innerHTML = `<div class="widget">
             ${cover}
           <img src="${window.variables.avatarURL}" class="photo" />
-          <h1>${variables.name} ${variablesz.lastname}</h1>
+          <h1>${variables.name} ${variables.lastname}</h1>
           <h2>${variables.role}</h2>
           <h3>${variables.city}, ${variables.country}</h3>
           <ul class="${variables.socialMediaPosition}">
@@ -73,9 +74,12 @@ window.onload = function() {
       let values = {};
       values[attribute] =
         this.value == ""
-          ? null: this.value == "true"
-          ? true: this.value == "false"
-          ? false: this.value;
+          ? null
+          : this.value == "true"
+          ? true
+          : this.value == "false"
+          ? false
+          : this.value;
       render(Object.assign(window.variables, values));
     });
   });
