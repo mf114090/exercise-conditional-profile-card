@@ -20,24 +20,50 @@ import "../style/index.scss";
 */
 
 function render(variables = {}) {
+  console.log("These are the current variables: ", variables);
   // here we ask the logical questions to make decisions on how to build the html
   // if includeCover==false then we reset the cover code without the <img> tag to make the cover transparent.
   let cover = `<div class="cover"><img src="${variables.background}" /></div>`;
-  let githubLink = `${variables.github}`;
   if (variables.includeCover == false) cover = "<div class='cover'></div>";
+
+  let name = "Lucy";
+  let lastname = "Boilett";
+  let twitter = "alesanchezr";
+  let github = "alesanchezr";
+  let linkedin = "alesanchezr";
+  let instagram = "alesanchezr";
+  let role = "Web Developer";
+  let city = "Miami";
+  let country = "USA";
+
+  if (variables.name != null && variables.name.trim() != "")
+    name = variables.name;
+  if (variables.lastname != null && variables.lastname.trim() != "")
+    lastname = variables.lastname;
+  if (variables.twitter != null && variables.twitter.trim() != "")
+    twitter = variables.twitter;
+  if (variables.github != null && variables.github.trim() != "")
+    github = variables.github;
+  if (variables.linkedin != null && variables.linkedin.trim() != "")
+    linkedin = variables.linkedin;
+  if (variables.instagram != null && variables.instagram.trim() != "")
+    instagram = variables.instagram;
+  if (variables.role != null) role = variables.role;
+  if (variables.city != null) city = variables.city;
+  if (variables.country != null) country = variables.country;
 
   // reset the website body with the new html output
   document.querySelector("#widget_content").innerHTML = `<div class="widget">
             ${cover}
           <img src="${window.variables.avatarURL}" class="photo" />
-          <h1>${variables.name} ${variables.lastname}</h1>
-          <h2>${variables.role}</h2>
-          <h3>${variables.city}, ${variables.country}</h3>
+          <h1>${name} ${lastname}</h1>
+          <h2>${role}</h2>
+          <h3>${city}, ${country}</h3>
           <ul class="${variables.socialMediaPosition}">
-            <li><a href="https://twitter.com/${variables.twitter}"><i class="fa fa-twitter"></i></a></li>
-            <li><a href="https://github.com/${variables.github}"><i class="fa fa-github"></i></a></li>
-            <li><a href="https://linkedin.com/${variables.linkedin}"><i class="fa fa-linkedin"></i></a></li>
-            <li><a href="https://instagram.com/${variables.instagram}"><i class="fa fa-instagram"></i></a></li>
+            <li><a href="https://twitter.com/${twitter}"><i class="fa fa-twitter"></i></a></li>
+            <li><a href="https://github.com/${github}"><i class="fa fa-github"></i></a></li>
+            <li><a href="https://linkedin.com/${linkedin}"><i class="fa fa-linkedin"></i></a></li>
+            <li><a href="https://instagram.com/${instagram}"><i class="fa fa-instagram"></i></a></li>
           </ul>
         </div>
     `;
@@ -73,7 +99,7 @@ window.onload = function() {
       const attribute = e.target.getAttribute("for");
       let values = {};
       values[attribute] =
-        this.value == ""
+        this.value == "" || this.value == "null"
           ? null
           : this.value == "true"
           ? true
